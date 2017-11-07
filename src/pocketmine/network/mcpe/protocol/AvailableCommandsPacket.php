@@ -312,16 +312,16 @@ class AvailableCommandsPacket extends DataPacket{
 			}
 		}
 
-		$this->enumValues = array_keys($enumValuesMap);
+		$this->enumValues = array_map('strval', array_keys($enumValuesMap)); //stupid PHP key casting D:
 		$this->putUnsignedVarInt($this->enumValuesCount = count($this->enumValues));
 		foreach($this->enumValues as $enumValue){
-			$this->putString((string) $enumValue); //stupid PHP key casting D:
+			$this->putString($enumValue);
 		}
 
-		$this->postfixes = array_keys($postfixesMap);
+		$this->postfixes = array_map('strval', array_keys($postfixesMap));
 		$this->putUnsignedVarInt(count($this->postfixes));
 		foreach($this->postfixes as $postfix){
-			$this->putString((string) $postfix);
+			$this->putString($postfix);
 		}
 
 		$this->enums = array_values($enumMap);
