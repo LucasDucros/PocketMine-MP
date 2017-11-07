@@ -21,29 +21,14 @@
 
 declare(strict_types=1);
 
-namespace pocketmine\entity\projectile;
+namespace pocketmine\network\mcpe\protocol\types;
 
-abstract class Throwable extends Projectile{
+class CommandOutputMessage{
+	/** @var bool */
+	public $isInternal;
+	/** @var string */
+	public $messageId;
+	/** @var string[] */
+	public $parameters = [];
 
-	public $width = 0.25;
-	public $height = 0.25;
-
-	protected $gravity = 0.03;
-	protected $drag = 0.01;
-
-	public function entityBaseTick(int $tickDiff = 1) : bool{
-		if($this->closed){
-			return false;
-		}
-
-		$hasUpdate = parent::entityBaseTick($tickDiff);
-
-		if($this->age > 1200 or $this->isCollided){
-			//TODO: hit particles
-			$this->flagForDespawn();
-			$hasUpdate = true;
-		}
-
-		return $hasUpdate;
-	}
 }
