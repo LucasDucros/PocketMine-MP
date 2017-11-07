@@ -315,13 +315,13 @@ class AvailableCommandsPacket extends DataPacket{
 		$this->enumValues = array_keys($enumValuesMap);
 		$this->putUnsignedVarInt($this->enumValuesCount = count($this->enumValues));
 		foreach($this->enumValues as $enumValue){
-			$this->putString($enumValue);
+			$this->putString((string) $enumValue); //stupid PHP key casting D:
 		}
 
 		$this->postfixes = array_keys($postfixesMap);
 		$this->putUnsignedVarInt(count($this->postfixes));
 		foreach($this->postfixes as $postfix){
-			$this->putString($postfix);
+			$this->putString((string) $postfix);
 		}
 
 		$this->enums = array_values($enumMap);
